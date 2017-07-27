@@ -46,7 +46,8 @@ printf("%s",no_bug);}
 /**************************************************************
 *	Prototype Declare Section
 **************************************************************/
-
+extern uchar ControlLeftSpeed;		//左轮速度控制
+extern uchar ControlRightSpeed;		//右轮速度控制
 
 /**************************************************************
 *	Global Variable Declare Section
@@ -71,10 +72,13 @@ printf("%s",no_bug);}
  */
  int main()
  {
-		Control_Car_GPIO_Config();
+
+		Car_Control_Init();
+		Control_Car_Direction(BACKWORD);
+		Control_Car_Speed(SPEED_MID);
 		while(1)
 		{
-				  Control_Car_Direction(FORWORD);
+			
 		}
  }
  

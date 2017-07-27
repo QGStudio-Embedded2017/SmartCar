@@ -38,7 +38,13 @@
 /**************************************************************
 *	Macro Define Section
 **************************************************************/
+#ifndef uchar
+#define uchar unsigned char
+#endif //uchar
 
+#ifndef uint
+#define uint unsigned int
+#endif //uint
 
 /**************************************************************
 *	Struct Define Section
@@ -59,9 +65,10 @@ typedef enum{
 #ifndef STYPE
 #define STYPE	
 typedef enum{
-	SPEED_High,		//高速
-	SPEED_Mid,		//中速
-	SPEED_Low     //低速
+	SPEED_FAST,		//高速
+	SPEED_MID,		//中速
+	SPEED_LOW,    //低速
+	SPEED_STOP		//停止
 } Speed_Type;
 #endif		//STYPE
 
@@ -69,7 +76,7 @@ typedef enum{
 *	Prototype Declare Section
 **************************************************************/
 //引脚初始化
-void Control_Car_GPIO_Config(void);
+void Car_Control_Init(void);
 
 //控制方向
 void Control_Car_Direction(Direction_Type direction);

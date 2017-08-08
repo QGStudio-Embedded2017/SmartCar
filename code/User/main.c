@@ -72,13 +72,23 @@ extern uchar ControlRightSpeed;		//右轮速度控制
  */
  int main()
  {
-
+		u32 status1,status2;              //0表示有障碍物，1表示无障碍物
 		Car_Control_Init();
 		Control_Car_Direction(BACKWORD);
 		Control_Car_Speed(SPEED_MID);
 		while(1)
 		{
-			
+				status1 = GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_11);    //将正前方有无障碍物赋值于status1
+				status2 = GPIO_ReadInputDataBit(GPIOD,GPIO_Pin_12);    //将左侧有无障碍物赋值于status2
+				Control_Car_Direction(FORWORD);
+				if(status1 == 0 && status2 == 0)                      //正前方且左侧均有障碍物
+				{
+					Control_Car_Direction(TURN_RIGHT_BACKWORD);					//改变方向，向右行驶
+				}
+				else if(status1 == 0 && status2 == 1)                 //正前方有障碍物，左侧无障碍物
+				{
+					Control_Car_Direction(TURN_LEFT_BACKWARD);          //改变方向，向左行驶
+				}
 		}
  }
  
